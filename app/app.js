@@ -107,7 +107,7 @@ app.use(
 //   language: "en" || lang,
 //   google: {
 //     version: "3",
-//     key: "AIzaSyAVL6RywJ8AvAD6u1aCGIofMm9XT89F7-o"
+
 //   },
 //   https: true
 //   // styles: []
