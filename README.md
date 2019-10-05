@@ -2,8 +2,8 @@
 
 ****************************************
 
+npm install 
 //Install Dependencies
-npm install
 
-//Run with browsersync
 gulp serve
+//Run with browsersync
