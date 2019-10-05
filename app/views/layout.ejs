@@ -1,0 +1,64 @@
+<html lang=lang || 'en', country_code=location || 'TW' > 
+  <head>
+    <% include ./partials/_header.pug %>
+    <link> href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet />
+    <link> href='/css/main.css', rel='stylesheet'/>
+    //- script(src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
+    <link> rel='stylesheet', type='text/css', href='//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css/>
+    <link> rel="icon" href="/images/lr_logo.ico" type="image/x-icon/>
+    <%if(csrfToken){%>
+      meta( name="_token" content=csrfToken || "")
+    <%}%>
+  </head>
+    
+  body
+    <%if (sessionFlash && sessionFlash.message && sessionFlash.type === 'message'){%>
+      #sessionFlashMessage.hide(atagValue=sessionFlash.atagValue) #{sessionFlash.message}
+    <%}%>
+    <% else if (sessionFlash && sessionFlash.message && sessionFlash.type === 'cancel'){%>
+      #sessionFlashCancel.hide #{sessionFlash.message}
+    <%}%>
+    <% include ./partials/_nav.pug
+    .app-wrap
+      block content
+      <% include ./partials/_footer.pug %>
+
+      //- script(src="/js/bundle.js")
+      script(src="/js/shared/templates.js")
+      script(src="/js/dropzone.min.js")
+      script(src="/js/shared/renderDropzone.js")
+      script(src="/js/shared/cbInteractions.js")
+      //- search function for finding items
+      script(src="/js/shared/itemSearch.js")
+      script(src="/js/shared/itemPrefill.js")
+      script(src="/js/shared/ajaxSetup.js")
+      script(src="/js/shared/validationErrors.js")
+      script(src="/js/shared/sortImages.js")
+      //- if files
+      //- script(src="/js/"+ [files] +"/accountInfo.js")
+      //- script(src="/js/"+ [files] +"/getOrdersItems.js")
+      //- script(src="/js/"+ [files] +"/itemInteractions.js")
+      //- script(src="/js/"+ [files] +"/showOrder.js")
+      //- else
+      script(src="/js/customer/accountInfo.js")
+      //- script(src="/js/shared/locationFinder.js")
+      //- script(src="/js/customer/getOrdersItems.js")
+      script(src="/js/shared/itemInteractions.js")
+      script(src="/js/shared/sessionFlash.js")
+      script(src="/js/customer/showOrder.js")
+      //- script(src="/js/shared/geolocator.js")
+      script.
+        function numberWithCommas(number) {
+            var parts = number.toString().split(".");
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            return parts.join(".");
+        }
+        $(document).ready(function() {
+          $(".forPrice").each(function() {
+            var num = $(this).text();
+            var commaNum = numberWithCommas(num);
+            $(this).text(commaNum);
+          });
+        });
+
+    <% include ./partials/_scripts.pug %> 
