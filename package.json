@@ -6,6 +6,7 @@
   "scripts": {
     "update:packages": "node app/wipe-dependencies.js && rm -rf node_modules && npm update --save-dev && npm update --save",
     "serve": "gulp browser-sync",
+    "start": "node app/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
