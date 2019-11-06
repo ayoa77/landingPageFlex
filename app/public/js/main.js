@@ -1,8 +1,8 @@
 Calendly.initBadgeWidget({
   url: "https://calendly.com/ayo_flex_studio/60min",
   text: "Click Here For A Consultation",
-  color: "#fff;",
-  textColor: "#222239",
+  color: "#222239",
+  textColor: "#fff",
   branding: false
 });
 
@@ -13,9 +13,11 @@ var c = {
 
 var widthHeightRatio = c.width / c.height;
 $("document").ready(function() {
-  if (widthHeightRation > 1) {
+  if (widthHeightRatio < 1) {
     var calendlyParent = $(".calendly-badge-widget")[0];
-    var calendlyElement = $(".calendly-badge-content")[0];
+    var calendlyElement = $(
+      ".calendly-badge-widget .calendly-badge-content"
+    )[0];
 
     console.log(calendlyParent);
 
@@ -50,8 +52,8 @@ function draw() {
   beginShape();
 
   let xoff = 0;
-  let whr = { w: 1700, h: 1400 };
-  if (widthHeightRatio > 1) whr = { w: 900, h: 700 };
+  let whr = { w: 900, h: 700 };
+  if (widthHeightRatio < 1) whr = { w: 1700, h: 1400 };
 
   for (let x = 0; x <= width; x += 10) {
     let y = map(noise(xoff, yoff), 0, 1, whr.w, whr.h);
