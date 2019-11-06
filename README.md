@@ -3,7 +3,8 @@
 ****************************************
 
 npm install 
-//Install Dependencies
+- Install Dependencies
 
 gulp serve
-//Run with browsersync
+- Run with browsersync
+

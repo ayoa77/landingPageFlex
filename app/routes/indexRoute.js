@@ -8,7 +8,9 @@ const router = express.Router();
 
 // router.get("/:lang(en|zh)", csrfProtection, indexController.get_index);
 exports.get_index = (req, res, next) => {
-  res.render('index');
+
+  res.render('index', {_layoutFile:'layout',sessionFlash: false,
+    csrfToken: false});
 };
 
 // exports.get_index = (req, res, next) => {

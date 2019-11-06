@@ -5,7 +5,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
-const mongoSanitize = require('mongo-express-sanitize');
+const mongoSanitize = require("mongo-express-sanitize");
 const helmet = require("helmet");
 const cors = require("cors");
 const app = express();
@@ -15,6 +15,8 @@ const app = express();
 const session = require("express-session");
 // const bcrypt = require("bcryptjs");
 const ejs = require("ejs");
+const ejsLint = require("ejs-lint");
+const ejsMate = require('ejs-mate');
 // const morgan = require("morgan");
 // require('https').globalAgent.options.ca = require('ssl-root-cas/latest').create();
 
@@ -56,7 +58,10 @@ app.get("/robots.txt", function(req, res) {
   res.send("\nDisallow:*");
 });
 
+app.engine('ejs', ejsMate);
+app.locals._layoutFile = 'layout';
 app.set("view engine", "ejs");
+// app.use(ejsLint)
 app.set("views", __dirname + "/views");
 app.use("/", express.static(__dirname + "/public"));
 
@@ -90,7 +95,8 @@ app.use("/", express.static(__dirname + "/public"));
 app.set("trust proxy", 1); // trust first proxy
 app.use(
   session({
-    secret: "thisISflexsLANDINGpageCOOKIEsuperfragilistexpialidociousOFaSecret123412341234",
+    secret:
+      "thisISflexsLANDINGpageCOOKIEsuperfragilistexpialidociousOFaSecret123412341234",
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -154,16 +160,12 @@ app.use(function(req, res, next) {
 if ("development" == app.get("env")) {
   console.log("you are running in dev mode");
   // mongoose.connect('mongodb://smc:smc123@localhost/smartmycity?authSource=smartmycity')
-  mongoose.connect(
-    "mongodb://127.0.0.1:27017/flexPage?socketTimeoutMS=100000"
-  );
+  mongoose.connect("mongodb://127.0.0.1:27017/flexPage?socketTimeoutMS=100000",  { useNewUrlParser: true,useUnifiedTopology: true });
   app.locals.pretty = true;
 } else if ("production") {
   console.log("you are running in production");
   // mongoose.connect('mongodb://localhostsmc:smc123@localhost/smartmycity?authSource=smartmycity')
-  mongoose.connect(
-    "mongodb://127.0.0.1:27017/flexPage?socketTimeoutMS=100000"
-  );
+  mongoose.connect("mongodb://127.0.0.1:27017/flexPage?socketTimeoutMS=100000",  { useNewUrlParser: true,useUnifiedTopology: true });
 }
 
 //for my https :)
@@ -172,11 +174,69 @@ if ("development" == app.get("env")) {
 //   cert: fs.readFileSync(path.resolve('/Users/ayoamadi/server.crt'))
 // }
 
-
 // app.get("/", (req, res, next) => {
 //   next();
 // });
 
 app.listen(8000, function(req, res) {
   console.log("listening on port 8000");
+});
+
+// function archive_all(testOnly) {
+//   messages = $("._5blh");
+//   var messageLength = messages.length;
+//   console.log("Found", messageLength, "messages on messenger.");
+
+//   for (i = 0; i < messageLength; i++) {
+//     console.log(
+//       "Archiving",
+//       i + 1,
+//       "out of",
+//       messageLength,
+//       "messages on messenger."
+//     );
+//     try {
+//       if (!testOnly) {
+//         messages[i].click(); // open dialog
+//         $("li:contains('Archive')")
+//           .last()
+//           .click();
+//       }
+//     } catch (TypeError) {
+//       console.log("TypeError");
+//     }
+//   }
+//   if (testOnly)
+//     console.log("Successfully tested archiving all of your facebook messages ");
+//   else console.log("Successfully archived all of your facebook messages ");
+// }
+
+// function archive_all(testOnly) {
+//   messages = $("._5blh");
+//   var messageLength = messages.length;
+//   console.log("Found", messageLength, "messages on messsenger.");
+//   if (!testOnly) {
+//     for (i = 0; i < messageLength; i++) {
+//       console.log(
+//         "Still Have",
+//         messageLength - i,
+//         "out of",
+//         messageLength,
+//         "messages on messsenger to be archived."
+//       );
+//       try {
+//         messages[i].click(); // open dialog
+//         $("li:contains('Archive')")
+//           .last()
+//           .click();
+//       } catch (TypeError) {
+//         console.log("TypeError");
+//       }
+//     }
+//   }
+// }
+
+app.get("/robots.txt", function(req, res) {
+  res.type("text/plain");
+  res.send("User-agent: *\nDisallow: /");
 });

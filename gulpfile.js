@@ -49,7 +49,7 @@ gulp.task(
   gulp.series("nodemon", function() {
     browserSync.init(null, {
       proxy: "http://localhost:8000",
-      // files: ["public/**/*.*"],
+      files: ["public/**/*.*"],
       // browser: "google-chrome",
       port: 8001
     });
@@ -76,6 +76,7 @@ gulp.task("images", function() {
 });
 
 gulp.task("styles", function() {
+  console.log('styles');
   return gulp
     .src("app/public/scss/main.scss")
     .pipe(
@@ -85,7 +86,7 @@ gulp.task("styles", function() {
     )
     .pipe(
       autoprefixer({
-        browsers: ["last 2 versions"],
+        // browsers: ["last 2 versions"],
         cascade: false
       })
     )
@@ -161,6 +162,7 @@ gulp.task("build", gulp.series(["styles", "purgecss", "scripts"], function() {
 gulp.task(
   "serve",
   gulp.series(["scripts", "styles", "purgecss", "browser-sync", "bs-reload"],function() {
+    console.log('serve');
     gulp.watch("app/public/scss/**/*.scss", ["styles"]);
     // gulp.watch("app/public/locales/*.json", ["js-watch", "bs-reload"]);
     gulp.watch("app/public/js/partials/*.js", ["js-watch", "bs-reload"]);
