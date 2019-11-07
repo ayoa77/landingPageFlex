@@ -44,12 +44,12 @@ $("document").ready(function() {
 
 // Setting up the Canvas
 function setup() {
-  let canvas = createCanvas(c.width, c.height);
+  var canvas = createCanvas(c.width, c.height);
   canvas.parent("sketch-holder");
   pixelDensity(1);
 }
 
-let yoff = 0.0; // 2nd dimension of perlin noise
+var yoff = 0.0; // 2nd dimension of perlin noise
 
 function draw() {
   background("#222239");
@@ -57,12 +57,12 @@ function draw() {
   fill(255);
   beginShape();
 
-  let xoff = 0;
-  let whr = { w: 1100, h: 600 };
+  var xoff = 0;
+  var whr = { w: 1100, h: 600 };
   if (widthHeightRatio < 1) whr = { w: 2100, h: 1500 };
 
-  for (let x = 0; x <= width; x += 10) {
-    let y = map(noise(xoff, yoff), 0, 1, whr.w, whr.h);
+  for (var x = 0; x <= width; x += 10) {
+    var y = map(noise(xoff, yoff), 0, 1, whr.w, whr.h);
     vertex(x, y);
     xoff += 0.05;
   }

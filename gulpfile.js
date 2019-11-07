@@ -49,7 +49,7 @@ gulp.task(
   gulp.series("nodemon", function() {
     browserSync.init(null, {
       proxy: "http://localhost:8000",
-      files: ["public/**/*.*"],
+      // files: ["public/**/*.*"],
       // browser: "google-chrome",
       port: 8001
     });
