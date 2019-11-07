@@ -163,8 +163,8 @@ gulp.task(
   "serve",
   gulp.series(["scripts", "styles", "purgecss", "browser-sync", "bs-reload"],function() {
     console.log('serve');
-    gulp.watch("app/public/scss/**/*.scss", ["styles"]);
+    gulp.watch("app/public/scss/*.scss", ["styles"]);
     // gulp.watch("app/public/locales/*.json", ["js-watch", "bs-reload"]);
-    gulp.watch("app/public/js/partials/*.js", ["js-watch", "bs-reload"]);
-    gulp.watch("app/views/**/*.ejs", ["bs-reload"]);
+    gulp.watch("app/public/js/*.js", ["js-watch", "bs-reload"]);
+    gulp.watch("app/views/*.ejs", ["bs-reload"]);
   }));
