@@ -7,8 +7,8 @@ Calendly.initBadgeWidget({
 });
 
 var c = {
-  width: window.innerWidth,
-  height: window.innerHeight
+  width: $(document).width(),
+  height: $(document).height()
 };
 
 var widthHeightRatio = c.width / c.height;
@@ -17,23 +17,22 @@ $("document").ready(function() {
   if (widthHeightRatio < 1) {
     var calendlyElement = $(
       ".calendly-badge-widget .calendly-badge-content"
-      )[0];
+    )[0];
 
     // calendlyParent.style.right = "30px";
     // calendlyParent.style.bottom = "30px";
     calendlyParent.style.bottom = null;
     calendlyParent.style.top = "30px";
     calendlyParent.style.right = "30px";
-    
+
     calendlyElement.style.width = "40vw";
     calendlyElement.style.height = "100px";
     calendlyElement.style.fontSize = "25px";
-    }else{
-      
-      calendlyParent.style.bottom = null;
-      calendlyParent.style.top = "30px";
-      calendlyParent.style.right = "30px";
-    }
+  } else {
+    calendlyParent.style.bottom = null;
+    calendlyParent.style.top = "30px";
+    calendlyParent.style.right = "30px";
+  }
 });
 // calendlyElement.style.height ='200px';
 
@@ -47,6 +46,8 @@ function setup() {
   var canvas = createCanvas(c.width, c.height);
   canvas.parent("sketch-holder");
   pixelDensity(1);
+  console.log("setemup");
+  console.log(canvas);
 }
 
 var yoff = 0.0; // 2nd dimension of perlin noise
